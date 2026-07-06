@@ -236,6 +236,46 @@
         </div>
         <div class="panel-content">
             <div class="menu-item">
+                <div class="menu-label">Master Volume <span id="val-master">90%</span></div>
+                <input type="range" id="vol-master" min="-60" max="0" step="1" value="-6">
+            </div>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+            <div class="menu-item">
+                <div class="menu-label">Tempo</div>
+                <div class="tempo-controls">
+                    <button class="tempo-btn active" id="tempo-1" aria-pressed="true">1/1 (120)</button>
+                    <button class="tempo-btn" id="tempo-2" aria-pressed="false">1/2 (60)</button>
+                </div>
+            </div>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+            <div class="menu-item">
+                <div class="menu-label">MUTE CHANNELS</div>
+                <div class="part-toggles">
+                    <div class="mute-btn" id="mute-piano" role="button" aria-pressed="false" tabindex="0">
+                        <div class="eye-icon" style="width: 22px; height: 22px; background: var(--expo-red);">
+                            <div class="eye-icon-white" style="width: 10px; height: 10px; top: 35%; left: 35%;"></div>
+                            <div class="eye-icon-pupil" style="width: 5px; height: 5px; top: 30%; left: 30%;"></div>
+                        </div>
+                        <span>Piano</span>
+                    </div>
+                    <div class="mute-btn" id="mute-strings" role="button" aria-pressed="false" tabindex="0">
+                        <div class="eye-icon" style="width: 26px; height: 26px; background: var(--expo-blue);">
+                            <div class="eye-icon-white" style="width: 12px; height: 12px; top: 50%; left: 65%;"></div>
+                            <div class="eye-icon-pupil" style="width: 6px; height: 6px; top: 50%; left: 70%;"></div>
+                        </div>
+                        <span>Strings</span>
+                    </div>
+                    <div class="mute-btn" id="mute-bass" role="button" aria-pressed="false" tabindex="0">
+                        <div class="eye-icon" style="width: 30px; height: 30px; background: var(--expo-gray);">
+                            <div class="eye-icon-white" style="width: 14px; height: 14px; top: 65%; left: 50%;"></div>
+                            <div class="eye-icon-pupil" style="width: 7px; height: 7px; top: 75%; left: 50%;"></div>
+                        </div>
+                        <span>Bass</span>
+                    </div>
+                </div>
+            </div>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+            <div class="menu-item">
                 <div class="menu-label">Background Style</div>
                 <button class="reset-bg-btn" onclick="resetBackground('#FFFFFF')">
                     <div class="bg-dot"></div><span>WHITE</span>
@@ -248,48 +288,18 @@
             </div>
             <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
             <div class="menu-item">
-                <div class="menu-label">Master Volume <span id="val-master">85%</span></div>
-                <input type="range" id="vol-master" min="-60" max="0" step="1" value="-6">
-            </div>
-            <div class="menu-item">
-                <div class="menu-label">Tempo</div>
+                <div class="menu-label">Reverb Type</div>
                 <div class="tempo-controls">
-                    <button class="tempo-btn active" id="tempo-1">1/1 (120)</button>
-                    <button class="tempo-btn" id="tempo-2">1/2 (60)</button>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-label">MUTE CHANNELS</div>
-                <div class="part-toggles">
-                    <div class="mute-btn" id="mute-piano">
-                        <div class="eye-icon" style="width: 22px; height: 22px; background: var(--expo-red);">
-                            <div class="eye-icon-white" style="width: 10px; height: 10px; top: 35%; left: 35%;"></div>
-                            <div class="eye-icon-pupil" style="width: 5px; height: 5px; top: 30%; left: 30%;"></div>
-                        </div>
-                        <span>Piano</span>
-                    </div>
-                    <div class="mute-btn" id="mute-strings">
-                        <div class="eye-icon" style="width: 26px; height: 26px; background: var(--expo-blue);">
-                            <div class="eye-icon-white" style="width: 12px; height: 12px; top: 50%; left: 65%;"></div>
-                            <div class="eye-icon-pupil" style="width: 6px; height: 6px; top: 50%; left: 70%;"></div>
-                        </div>
-                        <span>Strings</span>
-                    </div>
-                    <div class="mute-btn" id="mute-bass">
-                        <div class="eye-icon" style="width: 30px; height: 30px; background: var(--expo-gray);">
-                            <div class="eye-icon-white" style="width: 14px; height: 14px; top: 65%; left: 50%;"></div>
-                            <div class="eye-icon-pupil" style="width: 7px; height: 7px; top: 75%; left: 50%;"></div>
-                        </div>
-                        <span>Bass</span>
-                    </div>
+                    <button class="tempo-btn active" id="rv-metro">Metro</button>
+                    <button class="tempo-btn" id="rv-pavilion">Pavilion</button>
                 </div>
             </div>
             <div class="menu-footer">
-                <strong>Ver 2.1.5</strong><br>
+                <strong>Ver 2.2.0</strong><br>
                 このコンテンツは個人による非公式の二次創作（ファンアート）です。<br>
                 参考：<a href="https://www.expo2025.or.jp/news/news-20260330-01/" target="_blank">ガイドライン</a><br>
                 Presented by <strong>ARPeggioRev2</strong><br>
-                Program assisted by Gemini
+                Program assisted by Gemini、Claude（Anthropic）
             </div>
         </div>
     </div>
@@ -340,10 +350,9 @@
     const manifestEl = document.getElementById('pwa-manifest');
     if (manifestEl) manifestEl.href = manifestURL;
     if ('serviceWorker' in navigator) {
-        const swCode = `const CACHE = 'komyaku-v2.1.5'; self.addEventListener('install', e => { self.skipWaiting(); }); self.addEventListener('activate', e => { self.clients.claim(); }); self.addEventListener('fetch', e => { e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))); });`;
-        const swBlob = new Blob([swCode], { type: 'application/javascript' });
-        const swURL = URL.createObjectURL(swBlob);
-        navigator.serviceWorker.register(swURL, { scope: './' }).catch(err => console.warn('[PWA] SW Failed', err));
+        // Blob URLでのSW登録はほぼ全ブラウザでブロックされ無効なため、実体ファイル(./sw.js)を登録する。
+        // sw.js は index.html と同じディレクトリに配置してください。
+        navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(err => console.warn('[PWA] SW registration failed', err));
     }
 })();
 
@@ -368,7 +377,9 @@ const audioState = {
     masterDb: -6,
     pianoVol: 1.0, stringsVol: 1.0, bassVol: 1.0,
     pianoMuted: false, stringsMuted: false, bassMuted: false,
-    activityLevel: 1.0, tempoScale: 1.0 
+    liveLevel: { piano: 0, strings: 0, bass: 0, overall: 0 },
+    tempoScale: 1.0,
+    tapeEcho: { reverbType: 'metro' }
 };
 
 function dbToGain(db) { if (db <= -60) return 0; return Math.pow(10, db / 20); }
@@ -410,11 +421,14 @@ function closePanel() {
 class SoundEngine {
     constructor() {
         this.ctx = null; this.ready = false; this.steps = 0; this.reverb = null; this.masterGain = null;
-        this.masterCompressor = null; this.tickTimeout = null;
+        this.schedulerTimer = null; this.nextStepTime = 0;
         this.scales = {
-            strings: [329.63, 369.99, 415.30, 440.00, 493.88, 554.37, 659.25], 
-            bass: [82.41, 123.47],
-            piano1: [329.63, 415.30, 493.88, 659.25], 
+            strings: [329.63, 369.99, 415.30, 440.00, 493.88, 554.37, 659.25],
+            stringsHigh: [329.63, 369.99, 415.30, 440.00, 493.88, 554.37, 659.25],
+            stringsLow: [164.81, 185.00, 207.65, 220.00, 246.94, 277.18, 329.63],
+            bass:     [82.41, 103.83, 123.47],  // E2, G#2, B2 (Eメジャートライアド)
+            bassHigh: [164.82, 246.94],           // E3, B3 (Mid)
+            piano1: [329.63, 415.30, 493.88, 659.25],
             piano2: [164.81, 207.65, 246.94, 293.66, 329.63],
             contact: [329.63, 369.99, 415.30, 440.00, 493.88, 554.37, 622.25, 659.25]
         };
@@ -425,89 +439,429 @@ class SoundEngine {
         if (!this.ctx) {
             const AC = window.AudioContext || window.webkitAudioContext;
             this.ctx = new AC();
+
+            // --- Limiter（最終段） ---
+            this.limiter = this.ctx.createDynamicsCompressor();
+            this.limiter.threshold.value = -2.0;
+            this.limiter.knee.value      =  0.0;
+            this.limiter.ratio.value     = 20.0;
+            this.limiter.attack.value    = 0.001;
+            this.limiter.release.value   = 0.1;
+            this.limiter.connect(this.ctx.destination);
+
+            // --- Master dry bus (合算用、ボリューム自体はパート別volumeGainで適用) ---
             this.masterGain = this.ctx.createGain();
-            this.updateMasterVolume(audioState.masterDb);
-            this.masterCompressor = this.ctx.createDynamicsCompressor();
-            this.masterCompressor.threshold.setValueAtTime(-18, this.ctx.currentTime);
-            this.masterCompressor.release.setValueAtTime(0.25, this.ctx.currentTime);
+            this.masterGain.gain.value = 1.0;
+            this.masterGain.connect(this.limiter);
+
+            // --- Reverb ---
             this.reverb = this.ctx.createConvolver();
-            await this.initReverb();
+            this.reverb.buffer = this.buildReverbIR(audioState.tapeEcho.reverbType);
+
+            this.reverbHPF = this.ctx.createBiquadFilter();
+            this.reverbHPF.type = 'highpass';
+            this.reverbHPF.frequency.value = 80;
+            this.reverbHPF.Q.value = 0.5;
+
+            this.reverbOut = this.ctx.createGain();
+            this.reverbOut.gain.value = 1.0;
+
+            this.reverbHPF.connect(this.reverb);
+            this.reverb.connect(this.reverbOut);
+            this.reverbOut.connect(this.limiter);
+
+            // --- パート別 reverb send ---
+            this.reverbSends = {
+                piano:   this.ctx.createGain(),
+                strings: this.ctx.createGain(),
+                bass:    this.ctx.createGain(),
+            };
+            this.reverbSends.piano.gain.value   = 1.0;
+            this.reverbSends.strings.gain.value = 1.0;
+            this.reverbSends.bass.gain.value    = 0.1;
+            Object.values(this.reverbSends).forEach(s => s.connect(this.reverbHPF));
+
+            // --- パート別マスターボリュームゲイン ---
+            // analyser → volumeGain(masterDb) → masterGain(dry合算) + reverbSends[part]
+            // ここでマスターボリュームを適用することで、ドライ・リバーブ両方に
+            // 同じ比率でボリュームが効き、パート間バランス(bass=0.1など)も保たれる。
+            this.volumeGains = {
+                piano:   this.ctx.createGain(),
+                strings: this.ctx.createGain(),
+                bass:    this.ctx.createGain(),
+            };
+            const initGain = dbToGain(audioState.masterDb);
+            Object.values(this.volumeGains).forEach(g => g.gain.value = initGain);
+
+            // --- アナライザー ---
             ['piano', 'strings', 'bass'].forEach(p => {
                 const node = this.ctx.createAnalyser(); node.fftSize = 256;
-                this.analysers[p] = node; node.connect(this.masterGain);
+                this.analysers[p] = node;
+                node.connect(this.volumeGains[p]);
+                this.volumeGains[p].connect(this.masterGain);
+                this.volumeGains[p].connect(this.reverbSends[p]);
             });
-            this.masterGain.connect(this.masterCompressor);
-            this.masterCompressor.connect(this.reverb);
-            this.reverb.connect(this.ctx.destination);
+
+            // --- コンタクトサウンド用ボリュームゲイン ---
+            // contactBusも他パートと同じくマスターボリュームの影響を受けるようにする
+            this.contactVolumeGain = this.ctx.createGain();
+            this.contactVolumeGain.gain.value = initGain;
+            this.contactVolumeGain.connect(this.masterGain);
+            this.contactVolumeGain.connect(this.reverbHPF);
         }
         if (this.ctx.state === 'suspended') await this.ctx.resume();
         this.ready = true;
     }
 
-    async initReverb() {
-        const len = this.ctx.sampleRate * 3.5;
-        const buf = this.ctx.createBuffer(2, len, this.ctx.sampleRate);
-        for (let c = 0; c < 2; c++) {
-            const data = buf.getChannelData(c);
-            for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.5);
+    // hall / plate / spring の3種のIRを生成して返す
+    buildReverbIR(type) {
+        const sr = this.ctx.sampleRate;
+        type = type || 'metro';
+
+        function normalize(buf) {
+            let sumSq = 0;
+            for (let c = 0; c < buf.numberOfChannels; c++) {
+                const d = buf.getChannelData(c);
+                for (let i = 0; i < d.length; i++) sumSq += d[i] * d[i];
+            }
+            const rms = Math.sqrt(sumSq / (buf.length * buf.numberOfChannels));
+            const norm = 0.08 / (rms + 1e-9);
+            for (let c = 0; c < buf.numberOfChannels; c++) {
+                const d = buf.getChannelData(c);
+                for (let i = 0; i < d.length; i++) d[i] *= norm;
+            }
+            return buf;
         }
-        this.reverb.buffer = buf;
+
+        if (type === 'metro') {
+            // ── Metro: 夢洲駅コンコース 190m × 17m ───────────────
+            // RT60 ≈ 4.5s (体積≒19,000㎥、吸音率0.04)
+            // 幅17m → 壁間往復 = 17/340×2 ≒ 0.1s → フラッターエコー周期
+            // 端壁190m → 0.56s遅延で強い反射が到達
+            // コンクリート硬面 → 高域が明るく長く残る
+            const len = Math.floor(sr * 4.5);
+            const buf = this.ctx.createBuffer(2, len, sr);
+            const pre = Math.floor(sr * 0.012);
+
+            // 幅方向フラッターエコー（50ms間隔、コンクリート反射率≒0.68ずつ減衰）
+            const flutterTaps = [];
+            let flutterGain = 0.72;
+            for (let n = 1; n <= 12; n++) {
+                flutterTaps.push({ t: n * 0.050, g: flutterGain });
+                flutterGain *= 0.68;
+            }
+            // 端壁反射（190m）
+            const endWallTap = { t: 0.559, g: 0.18 };
+            const endWallTap2 = { t: 1.118, g: 0.06 };
+
+            for (let c = 0; c < 2; c++) {
+                const d = buf.getChannelData(c);
+                const chMod = c === 0 ? 1.0 : 0.92;
+
+                for (let i = 0; i < len; i++) {
+                    if (i < pre) { d[i] = 0; continue; }
+                    const iRel = i - pre;
+                    const t = iRel / sr;
+
+                    // フラッターエコー（L/Rで位相を反転しステレオ広がりを出す）
+                    let flutter = 0;
+                    flutterTaps.forEach((tap, idx) => {
+                        const tapIdx = Math.floor(tap.t * sr);
+                        if (iRel === tapIdx)
+                            flutter = tap.g * (c === 0 ? 1 : (idx % 2 === 0 ? -0.88 : 0.88));
+                    });
+
+                    // 端壁反射
+                    let endWall = 0;
+                    if (iRel === Math.floor(endWallTap.t * sr))  endWall =  endWallTap.g * chMod;
+                    if (iRel === Math.floor(endWallTap2.t * sr)) endWall = endWallTap2.g * chMod;
+
+                    // 拡散尾引き: 高域ゆっくり、低域やや速め（コンクリートの明るさ）
+                    const noise = Math.random() * 2 - 1;
+                    const hfTail = noise * Math.exp(-t * 0.85) * 0.22; // 明るい長い尾引き
+                    const lfTail = noise * Math.exp(-t * 2.0)  * 0.10;
+
+                    d[i] = (flutter + endWall + hfTail + lfTail) * chMod;
+                }
+            }
+            return normalize(buf);
+
+        } else {
+            // ── Pavilion: 膜構造大空間 ─────────────────────────
+            // RT60 ≈ 2.8s (膜素材は高域を吸収 → Metroより短く暗い)
+            // 初期反射なし → 拡散場がゆっくり立ち上がる
+            // 低域・膜モードが長く残り、高域は速く消える
+            // Metroとの対比: 暗く・柔らかく・短い
+            const len = Math.floor(sr * 2.8);
+            const buf = this.ctx.createBuffer(2, len, sr);
+            const pre = Math.floor(sr * 0.040);
+
+            // 膜固有振動モード（L/Rで微差）
+            const membraneModes = [
+                [{ f: 47, a: 0.32, decay: 2.2 }, { f: 71, a: 0.22, decay: 1.8 }, { f: 109, a: 0.13, decay: 1.3 }],
+                [{ f: 49, a: 0.30, decay: 2.0 }, { f: 74, a: 0.20, decay: 1.6 }, { f: 113, a: 0.11, decay: 1.2 }],
+            ];
+
+            for (let c = 0; c < 2; c++) {
+                const d = buf.getChannelData(c);
+                const modes = membraneModes[c];
+
+                for (let i = 0; i < len; i++) {
+                    if (i < pre) { d[i] = 0; continue; }
+                    const t = (i - pre) / sr;
+
+                    // ゆっくりした立ち上がり（200ms かけて最大値へ）
+                    const buildUp = Math.min(1.0, t / 0.20);
+
+                    // 高域: 膜が吸収するので速く消える（暗い特性）
+                    const hfNoise = (Math.random() * 2 - 1) * Math.exp(-t * 3.5) * 0.14;
+                    // 低域: 大空間で適度に残る
+                    const lfNoise = (Math.random() * 2 - 1) * Math.exp(-t * 1.2) * 0.20;
+
+                    // 膜モード（暖かい低音の尾引き）
+                    let membrane = 0;
+                    modes.forEach(m => {
+                        membrane += Math.sin(2 * Math.PI * m.f * t)
+                            * Math.exp(-t / m.decay) * m.a;
+                    });
+
+                    d[i] = (hfNoise + lfNoise + membrane) * buildUp;
+                }
+            }
+            return normalize(buf);
+        }
     }
 
-    updateMasterVolume(db) { if (this.masterGain) this.masterGain.gain.setTargetAtTime(dbToGain(db), this.ctx.currentTime, 0.05); }
+    setReverbType(type) {
+        if (audioState.tapeEcho.reverbType === type) return; // 同じタイプなら何もしない
+        audioState.tapeEcho.reverbType = type;
+        if (this.reverb) this.reverb.buffer = this.buildReverbIR(type);
+        ['metro','pavilion'].forEach(t =>
+            document.getElementById('rv-' + t).classList.toggle('active', t === type)
+        );
+    }
 
-    triggerPiano(freq, panX, gain, isHigh = false) {
+    updateMasterVolume(db) {
+        const g = dbToGain(db);
+        if (!this.volumeGains) return;
+        Object.values(this.volumeGains).forEach(node => node.gain.setTargetAtTime(g, this.ctx.currentTime, 0.05));
+        if (this.contactVolumeGain) this.contactVolumeGain.gain.setTargetAtTime(g, this.ctx.currentTime, 0.05);
+    }
+
+    // 各パートのanalyserから実際の音量(0〜1に正規化)を読み取る。
+    // これを使うことで「見た目の演出」が本当の音の大きさに連動する。
+    getLevel(analyser) {
+        if (!analyser) return 0;
+        const data = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(data);
+        let sum = 0;
+        for (let i = 0; i < data.length; i++) sum += data[i];
+        return (sum / data.length) / 255;
+    }
+
+    getOverallLevel() {
+        const piano = this.getLevel(this.analysers.piano);
+        const strings = this.getLevel(this.analysers.strings);
+        const bass = this.getLevel(this.analysers.bass);
+        return { piano, strings, bass, overall: Math.max(piano, strings, bass) };
+    }
+
+    triggerPiano(freq, panX, gain, isHigh = false, time = null) {
         if (!this.ready || audioState.pianoMuted) return;
-        const now = this.ctx.currentTime;
-        const panner = this.ctx.createStereoPanner(); panner.pan.setValueAtTime(panX, now);
-        const pg = this.ctx.createGain(); pg.gain.setValueAtTime(0, now);
-        pg.gain.linearRampToValueAtTime(gain * audioState.pianoVol * 1.2, now + 0.005);
-        pg.gain.exponentialRampToValueAtTime(0.001, now + (isHigh ? 1.8 : 3.0));
-        const osc1 = this.ctx.createOscillator(); osc1.type = 'sine'; osc1.frequency.setValueAtTime(freq, now);
-        const lp = this.ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(isHigh ? 3500 : 1800, now);
-        osc1.connect(pg); osc1.start(now); osc1.stop(now + 3.1);
-        pg.connect(lp); lp.connect(panner); panner.connect(this.analysers.piano);
+        const now = time !== null ? time : this.ctx.currentTime;
+        const dur = isHigh ? 3.2 : 5.0;
+        const toneFreq = 1005; // 800 * 10^0.10 ≒ 1005Hz (Tone 10% 固定)
+
+        const sustainPartials = [
+            { ratio: 1, g: 1.00, decay: 1.0  },
+            { ratio: 2, g: 0.18, decay: 0.45 },
+        ];
+        const attackPartials = [
+            { ratio: 4, g: 0.22, decaySec: 0.12 },
+            { ratio: 6, g: 0.12, decaySec: 0.07 },
+            { ratio: 8, g: 0.06, decaySec: 0.04 },
+        ];
+
+        const mixGain = this.ctx.createGain();
+        mixGain.gain.setValueAtTime(gain * audioState.pianoVol * 0.5, now);
+
+        sustainPartials.forEach(({ ratio, g, decay }) => {
+            const osc = this.ctx.createOscillator();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq * ratio, now);
+            const eg = this.ctx.createGain();
+            eg.gain.setValueAtTime(0, now);
+            eg.gain.linearRampToValueAtTime(g, now + 0.008);
+            eg.gain.exponentialRampToValueAtTime(0.001, now + dur * decay);
+            osc.connect(eg); eg.connect(mixGain);
+            osc.start(now); osc.stop(now + dur * decay + 0.05);
+        });
+        attackPartials.forEach(({ ratio, g, decaySec }) => {
+            const osc = this.ctx.createOscillator();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq * ratio, now);
+            const eg = this.ctx.createGain();
+            eg.gain.setValueAtTime(0, now);
+            eg.gain.linearRampToValueAtTime(g, now + 0.004);
+            eg.gain.exponentialRampToValueAtTime(0.001, now + decaySec);
+            osc.connect(eg); eg.connect(mixGain);
+            osc.start(now); osc.stop(now + decaySec + 0.02);
+        });
+
+        const toneLP = this.ctx.createBiquadFilter();
+        toneLP.type = 'lowpass';
+        toneLP.frequency.setValueAtTime(toneFreq, now);
+        toneLP.Q.setValueAtTime(0.5, now);
+
+        const cabinetLow = this.ctx.createBiquadFilter();
+        cabinetLow.type = 'peaking';
+        cabinetLow.frequency.setValueAtTime(250, now);
+        cabinetLow.gain.setValueAtTime(3.0, now);
+        cabinetLow.Q.setValueAtTime(0.8, now);
+
+        const notch = this.ctx.createBiquadFilter();
+        notch.type = 'peaking';
+        notch.frequency.setValueAtTime(3000, now);
+        notch.gain.setValueAtTime(-10, now);
+        notch.Q.setValueAtTime(1.2, now);
+
+        const panner = this.ctx.createStereoPanner();
+        panner.pan.setValueAtTime(panX, now);
+
+        mixGain.connect(toneLP);
+        toneLP.connect(cabinetLow);
+        cabinetLow.connect(notch);
+        notch.connect(panner);
+        panner.connect(this.analysers.piano);
     }
 
-    triggerStrings(freq, panX, gain, type = 'high') {
+    triggerStrings(freq, panX, gain, type = 'high', time = null) {
         if (!this.ready || audioState.stringsMuted) return;
-        const now = this.ctx.currentTime;
-        const groupGain = this.ctx.createGain();
-        const panner = this.ctx.createStereoPanner(); panner.pan.setValueAtTime(panX, now);
-        const formants = type === 'high' ? [{ f: 700, q: 3, g: 1.0 }, { f: 1100, q: 5, g: 0.6 }, { f: 2800, q: 2, g: 0.25 }] : [{ f: 450, q: 4, g: 1.0 }, { f: 750, q: 5, g: 0.5 }, { f: 2200, q: 2, g: 0.15 }];
-        const osc = this.ctx.createOscillator(); osc.type = 'sawtooth'; osc.frequency.setValueAtTime(freq, now);
-        formants.forEach(fm => {
-            const filter = this.ctx.createBiquadFilter(); filter.type = 'bandpass'; filter.frequency.setValueAtTime(fm.f, now); filter.Q.setValueAtTime(fm.q, now);
-            const fg = this.ctx.createGain(); fg.gain.setValueAtTime(fm.g * gain * audioState.stringsVol * 2.2, now);
-            osc.connect(filter); filter.connect(fg); fg.connect(groupGain);
-        });
-        const env = this.ctx.createGain(); env.gain.setValueAtTime(0, now);
-        env.gain.linearRampToValueAtTime(gain * audioState.stringsVol * 2.2, now + 1.2); env.gain.exponentialRampToValueAtTime(0.001, now + 3.0);
-        osc.start(now); osc.stop(now + 3.1);
-        groupGain.connect(env); env.connect(panner); panner.connect(this.analysers.strings);
+        const now = time !== null ? time : this.ctx.currentTime;
+        const isHigh = type === 'high';
+        const attackTime  = 0.9;
+        const releaseTime = 2.8;
+        const totalDur    = attackTime + releaseTime;
+        const cutoff      = isHigh ? 3200 : 1800;
+        const CHORUS_DEPTH = 0.20;
+
+        const osc = this.ctx.createOscillator();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq, now);
+
+        const env = this.ctx.createGain();
+        env.gain.setValueAtTime(0, now);
+        env.gain.linearRampToValueAtTime(gain * audioState.stringsVol * 1.5, now + attackTime);
+        env.gain.exponentialRampToValueAtTime(0.001, now + totalDur);
+
+        const lp = this.ctx.createBiquadFilter();
+        lp.type = 'lowpass';
+        lp.frequency.setValueAtTime(cutoff, now);
+        lp.Q.setValueAtTime(0.6, now);
+
+        osc.connect(env); env.connect(lp);
+        osc.start(now); osc.stop(now + totalDur + 0.2);
+
+        const chorusRate  = 0.5;
+        const vibratoRate = 4.0;
+        const bbdPans = [-0.7, 0.0, 0.7];
+
+        for (let i = 0; i < 3; i++) {
+            const phaseOffset = (i * 2 * Math.PI) / 3;
+
+            const delay = this.ctx.createDelay(0.03);
+            delay.delayTime.setValueAtTime(0.007, now);
+
+            const lfoC = this.ctx.createOscillator();
+            lfoC.type = 'sine';
+            lfoC.frequency.setValueAtTime(chorusRate, now);
+            const lfoCGain = this.ctx.createGain();
+            lfoCGain.gain.setValueAtTime(0.004 * CHORUS_DEPTH, now);
+
+            const lfoV = this.ctx.createOscillator();
+            lfoV.type = 'sine';
+            lfoV.frequency.setValueAtTime(vibratoRate, now);
+            const lfoVGain = this.ctx.createGain();
+            lfoVGain.gain.setValueAtTime(0.001 * CHORUS_DEPTH, now);
+
+            // iOS Safari対策: startTimeを0未満にしない
+            const cOffset = phaseOffset / (2 * Math.PI * chorusRate);
+            const vOffset = phaseOffset / (2 * Math.PI * vibratoRate);
+            const cStart = Math.max(0, now - cOffset);
+            const vStart = Math.max(0, now - vOffset);
+
+            lfoC.connect(lfoCGain); lfoCGain.connect(delay.delayTime);
+            lfoV.connect(lfoVGain); lfoVGain.connect(delay.delayTime);
+            lfoC.start(cStart); lfoC.stop(now + totalDur + 0.2);
+            lfoV.start(vStart); lfoV.stop(now + totalDur + 0.2);
+
+            const bbdGain = this.ctx.createGain();
+            bbdGain.gain.setValueAtTime(1 / 3, now);
+
+            const panner = this.ctx.createStereoPanner();
+            panner.pan.setValueAtTime(bbdPans[i], now);
+
+            lp.connect(delay); delay.connect(bbdGain);
+            bbdGain.connect(panner);
+            panner.connect(this.analysers.strings);
+        }
     }
 
-    triggerBassSound(freq, pan = 0) {
+    triggerBassSound(freq, pan = 0, time = null) {
         if (!this.ready || audioState.bassMuted) return;
-        const now = this.ctx.currentTime;
-        const gainNode = this.ctx.createGain(); const filterNode = this.ctx.createBiquadFilter();
-        filterNode.type = 'lowpass'; filterNode.frequency.setValueAtTime(2000, now);
-        [0, 2, -2].forEach((detuneHz, i) => {
-            const osc = this.ctx.createOscillator(); osc.type = 'sine'; osc.frequency.setValueAtTime(freq * 2 + detuneHz, now);
-            osc.connect(filterNode); osc.start(now + i * 0.03); osc.stop(now + 12);
+        const now = time !== null ? time : this.ctx.currentTime;
+        const f = freq;
+        const attackTime  = 1.0;
+        const sustainTime = 3.0;
+        const releaseTime = 2.0;
+        const totalDur = attackTime + sustainTime + releaseTime;
+
+        const srcGain = this.ctx.createGain();
+        srcGain.gain.setValueAtTime(0.5, now);
+
+        [-1, 1].forEach(d => {
+            const osc = this.ctx.createOscillator();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(f, now);
+            osc.detune.setValueAtTime(d, now);
+            osc.connect(srcGain);
+            osc.start(now); osc.stop(now + totalDur + 0.2);
         });
-        gainNode.gain.setValueAtTime(0, now); gainNode.gain.linearRampToValueAtTime(0.45 * audioState.bassVol, now + 0.8);
-        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 10);
-        const panner = this.ctx.createStereoPanner(); panner.pan.setValueAtTime(pan, now);
-        filterNode.connect(gainNode); gainNode.connect(panner); panner.connect(this.analysers.bass);
-        this.spawnParticle(CONFIG.COLORS.GRAY);
+
+        const filt = this.ctx.createBiquadFilter();
+        filt.type = 'lowpass';
+        filt.Q.setValueAtTime(1.2, now);
+        filt.frequency.setValueAtTime(800, now);
+        filt.frequency.exponentialRampToValueAtTime(180, now + attackTime);
+        filt.frequency.setValueAtTime(180, now + attackTime + sustainTime);
+        filt.frequency.exponentialRampToValueAtTime(120, now + totalDur);
+
+        const env = this.ctx.createGain();
+        env.gain.setValueAtTime(0, now);
+        env.gain.linearRampToValueAtTime(0.22 * audioState.bassVol, now + attackTime);
+        env.gain.setValueAtTime(0.22 * audioState.bassVol, now + attackTime + sustainTime);
+        env.gain.exponentialRampToValueAtTime(0.001, now + totalDur);
+
+        const panner = this.ctx.createStereoPanner();
+        panner.pan.setValueAtTime(pan, now);
+
+        srcGain.connect(filt);
+        filt.connect(env);
+        env.connect(panner);
+        panner.connect(this.analysers.bass);
     }
 
     triggerContactSound(freqIndex = null) {
         if (!this.ready || !this.ctx) return;
         const now = this.ctx.currentTime;
         const baseFreq = freqIndex !== null ? this.scales.contact[freqIndex % this.scales.contact.length] : this.scales.contact[Math.floor(Math.random() * this.scales.contact.length)];
-        
+
+        // contactBus: contactVolumeGain(マスターボリューム適用済み)経由でドライ・リバーブ両方へ
+        const contactBus = this.ctx.createGain();
+        contactBus.gain.value = 1.0;
+        if (this.contactVolumeGain) contactBus.connect(this.contactVolumeGain);
+        else { contactBus.connect(this.masterGain); if (this.reverbHPF) contactBus.connect(this.reverbHPF); }
+
         for (let i = 0; i < 3; i++) {
             const delay = i * 0.08;
             const startTime = now + delay;
@@ -516,105 +870,170 @@ class SoundEngine {
             bodyOsc.type = 'sine';
             bodyOsc.frequency.setValueAtTime(baseFreq, startTime);
             bodyGain.gain.setValueAtTime(0.001, startTime);
-            const peakGain = (0.3 / (i + 1)); 
+            const peakGain = (0.3 / (i + 1));
             bodyGain.gain.linearRampToValueAtTime(peakGain, startTime + 0.01);
             bodyGain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.5);
             bodyOsc.connect(bodyGain);
-            bodyGain.connect(this.masterGain);
+            bodyGain.connect(contactBus);
             bodyOsc.start(startTime);
             bodyOsc.stop(startTime + 0.6);
 
             if (i === 0) {
                 const clickOsc = this.ctx.createOscillator();
                 const clickGain = this.ctx.createGain();
-                clickOsc.type = 'square'; 
-                clickOsc.frequency.setValueAtTime(baseFreq * 4, startTime); 
+                clickOsc.type = 'square';
+                clickOsc.frequency.setValueAtTime(baseFreq * 4, startTime);
                 clickGain.gain.setValueAtTime(0.001, startTime);
                 clickGain.gain.linearRampToValueAtTime(0.4, startTime + 0.01);
                 clickGain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.02);
                 clickOsc.connect(clickGain);
-                clickGain.connect(this.masterGain);
+                clickGain.connect(contactBus);
                 clickOsc.start(startTime);
                 clickOsc.stop(startTime + 0.03);
             }
         }
     }
 
-    triggerInst(part, panX) {
+    triggerInst(part, panX, time = null) {
         if (!this.ready) return;
-        const freqArr = this.scales[part] || this.scales.strings;
+        const scheduledTime = time !== null ? time : this.ctx.currentTime;
+        // 視覚エフェクト(パーティクル)は予約された発音タイミングに合わせて遅延発火させる。
+        // タブが非表示の間はどちらにせよ画面が見えないので、このsetTimeoutが多少ズレても問題ない。
+        const visualDelayMs = Math.max(0, (scheduledTime - this.ctx.currentTime) * 1000);
+        let freqArr;
+        if (part === 'strings1') freqArr = this.scales.stringsHigh;
+        else if (part === 'strings2') freqArr = this.scales.stringsLow;
+        else freqArr = this.scales[part] || this.scales.strings;
         const freq = freqArr[Math.floor(Math.random() * freqArr.length)];
         if (part.includes('strings')) {
             if (audioState.stringsMuted) return;
-            this.triggerStrings(freq, panX, 0.5, part === 'strings1' ? 'high' : 'low');
-            if (Math.random() < audioState.activityLevel) this.spawnParticle(CONFIG.COLORS.BLUE);
+            this.triggerStrings(freq, panX, 0.5, part === 'strings1' ? 'high' : 'low', scheduledTime);
+            setTimeout(() => this.spawnParticle(CONFIG.COLORS.BLUE, this.levelToIntensity(this.analysers.strings)), visualDelayMs);
         } else if (part === 'bass') {
-            this.triggerBassSound(freq, panX);
+            if (audioState.bassMuted) return;
+            this.triggerBassSound(freq, panX, scheduledTime);
+            setTimeout(() => this.spawnParticle(CONFIG.COLORS.GRAY, this.levelToIntensity(this.analysers.bass)), visualDelayMs);
         } else if (part.includes('piano')) {
             if (audioState.pianoMuted) return;
-            this.triggerPiano(freq, panX, 0.45, part === 'piano1');
-            if (Math.random() < audioState.activityLevel) this.spawnParticle(CONFIG.COLORS.RED);
+            this.triggerPiano(freq, panX, 0.45, part === 'piano1', scheduledTime);
+            setTimeout(() => this.spawnParticle(CONFIG.COLORS.RED, this.levelToIntensity(this.analysers.piano)), visualDelayMs);
         }
     }
 
-    spawnParticle(colorHex) {
+    // 発火した瞬間の実際の音量を、パーティクルの大きさを決める係数(0.8〜2.2程度)に変換する。
+    // 発生そのもの(出るか出ないか)は常に保証し、大きさだけが実際の音量に応じて変わる。
+    levelToIntensity(analyser) {
+        const lvl = this.getLevel(analyser);
+        return 0.8 + lvl * 1.4;
+    }
+
+    spawnParticle(colorHex, intensity = 1.0) {
         const angle = Math.random() * Math.PI * 2; const startX = width/2; const startY = centerY + bodyY;
-        if (Math.random() < 0.25) entities.push(new MiniCoMyaku(startX, startY, colorHex, angle));
-        else entities.push(new Bubble(startX, startY, colorHex, angle));
+        if (Math.random() < 0.25) entities.push(new MiniCoMyaku(startX, startY, colorHex, angle, intensity));
+        else entities.push(new Bubble(startX, startY, colorHex, angle, intensity));
+    }
+
+    // Web Audioのクロック(ctx.currentTime)を基準にした先読みスケジューラ。
+    // setTimeoutの再帰呼び出しは、バックグラウンドタブ/画面ロック時にブラウザがタイマーを
+    // 間引く(スロットリングする)影響を受けてリズムが崩れるため、「未来の発音時刻」を
+    // AudioContextの時間軸で予約しておき、短い間隔のポーリングで取りこぼしなく予約していく。
+    scheduleStep(step, time) {
+        if (step % CONFIG.AUDIO.PRIMES.BASS === 0) this.triggerInst('bass', 0, time);
+        if (step % CONFIG.AUDIO.PRIMES.PIANO_1 === 0) this.triggerInst('piano1', -0.4, time);
+        if (step % CONFIG.AUDIO.PRIMES.PIANO_2 === 0) this.triggerInst('piano2', 0.4, time);
+        if (step % CONFIG.AUDIO.PRIMES.STRINGS_1 === 0) this.triggerInst('strings1', -0.25, time);
+        if (step % CONFIG.AUDIO.PRIMES.STRINGS_2 === 0) this.triggerInst('strings2', 0.25, time);
+    }
+
+    scheduler() {
+        if (!isMasterPlaying || !this.ready) return;
+        const scheduleAheadTime = 0.1; // 秒。この時間分だけ先読みして予約する
+        while (this.nextStepTime < this.ctx.currentTime + scheduleAheadTime) {
+            this.scheduleStep(this.steps, this.nextStepTime);
+            const stepDuration = (CONFIG.AUDIO.BASE_TICK / 1000) * audioState.tempoScale;
+            this.nextStepTime += stepDuration;
+            this.steps++;
+        }
     }
 
     startLoop() {
-        const tick = () => {
-            if (!isMasterPlaying || !this.ready) return;
-            if (this.steps % CONFIG.AUDIO.PRIMES.BASS === 0) this.triggerInst('bass', 0);
-            if (this.steps % CONFIG.AUDIO.PRIMES.PIANO_1 === 0) this.triggerInst('piano1', -0.4);
-            if (this.steps % CONFIG.AUDIO.PRIMES.PIANO_2 === 0) this.triggerInst('piano2', 0.4);
-            if (this.steps % CONFIG.AUDIO.PRIMES.STRINGS_1 === 0) this.triggerInst('strings1', -0.25);
-            if (this.steps % CONFIG.AUDIO.PRIMES.STRINGS_2 === 0) this.triggerInst('strings2', 0.25);
-            this.steps++;
-            this.tickTimeout = setTimeout(tick, CONFIG.AUDIO.BASE_TICK * audioState.tempoScale);
-        };
-        tick();
+        // 再開時に古いnextStepTimeが残っていると「停止していた間の分」を一気に
+        // まとめて再生してしまうため、再生開始のたびに現在時刻基準でリセットする。
+        this.nextStepTime = this.ctx.currentTime + 0.05;
+        const lookaheadMs = 25;
+        this.schedulerTimer = setInterval(() => this.scheduler(), lookaheadMs);
     }
 }
 
 // --- ENTITIES ---
+// 軌道: Co-MYAKU中央から放射 + 微小な時計回りドリフト
+// サイズ: r/bodyRadiusに比例して拡大(俯瞰カメラのパース効果を再現)
+
 class Bubble {
-    constructor(x, y, color, angle) {
-        this.baseX = x; this.baseY = y; this.color = color; this.angle = angle;
-        this.speed = 1.5 + Math.random() * 2.5; this.dist = 0; this.life = 1.0; 
-        this.maxSize = 25 + Math.random() * 25; this.offsetPhase = Math.random() * Math.PI * 2;
-        this.offsetFreq = 0.05 + Math.random() * 0.05; this.offsetAmp = 10 + Math.random() * 20;
+    constructor(x, y, color, angle, intensity = 1.0) {
+        this.baseX = x; this.baseY = y; this.color = color;
+        this.startAngle = angle;
+        this.r = currentCoMyakuRadius;
+        this.radialSpeed = 2.8 + Math.random() * 2.0;
+        this.driftRate = 0.002 + Math.random() * 0.002;
+        this.frame = 0;
+        this.life = 1.0;
+        // baseSize: 外周(r=bodyRadius)での基準サイズ。距離に比例して拡大する。
+        this.baseSize = (6 + Math.random() * 7) * intensity;
+        this.fadeRange = 24;
     }
-    update() { this.dist += this.speed; this.life -= 0.006; return this.life > 0; }
+    update() { this.r += this.radialSpeed; this.frame++; this.life -= 0.004; return this.life > 0; }
     draw(ctx) {
-        const tx = Math.cos(this.angle) * this.dist; const ty = Math.sin(this.angle) * this.dist;
-        const wave = Math.sin(this.dist * this.offsetFreq + this.offsetPhase) * this.offsetAmp * (1.0 - this.life);
-        ctx.save(); ctx.globalAlpha = Math.min(1.0, this.life * 5.0);
-        ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.baseX + tx - Math.sin(this.angle)*wave, this.baseY + ty + Math.cos(this.angle)*wave, this.maxSize * (1.0 - this.life), 0, Math.PI * 2); ctx.fill(); ctx.restore();
+        const angle = this.startAngle + this.driftRate * this.frame;
+        const x = this.baseX + this.r * Math.cos(angle);
+        const y = this.baseY + this.r * Math.sin(angle);
+        const fadeIn = Math.min(1.0, (this.r - currentCoMyakuRadius) / this.fadeRange);
+        const fadeOut = this.life < 0.15 ? this.life / 0.15 : 1.0;
+        // パース拡大: ハードクランプではなく有理関数で滑らかに漸近(t=1→1.0, t→∞→3.0)
+        const t = this.r / currentCoMyakuRadius;
+        const scale = t * 3.0 / (t + 2.0);
+        const drawSize = this.baseSize * scale;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, fadeIn * fadeOut);
+        ctx.fillStyle = this.color;
+        ctx.beginPath(); ctx.arc(x, y, drawSize, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
     }
 }
 
 class MiniCoMyaku {
-    constructor(startX, startY, color, angle) {
-        this.baseX = startX; this.baseY = startY; this.color = color; this.angle = angle;
-        this.speed = 1.0 + Math.random() * 1.5; this.dist = 0; this.life = 1.0; this.maxSize = 35 + Math.random() * 15; 
-        const ewAngle = Math.random() * Math.PI * 2; this.ewXRatio = Math.cos(ewAngle) * 0.3; this.ewYRatio = Math.sin(ewAngle) * 0.3;
-        this.lookX = Math.cos(Math.random() * Math.PI * 2) * 0.5; this.lookY = Math.sin(Math.random() * Math.PI * 2) * 0.5;
-        this.offsetPhase = Math.random() * Math.PI * 2; this.offsetFreq = 0.04 + Math.random() * 0.04; this.offsetAmp = 15 + Math.random() * 15;
+    constructor(startX, startY, color, angle, intensity = 1.0) {
+        this.baseX = startX; this.baseY = startY; this.color = color;
+        this.startAngle = angle;
+        this.r = currentCoMyakuRadius;
+        this.radialSpeed = 2.2 + Math.random() * 1.6;
+        this.driftRate = 0.002 + Math.random() * 0.002;
+        this.frame = 0;
+        this.life = 1.0;
+        this.baseSize = (10 + Math.random() * 8) * intensity;
+        this.fadeRange = 24;
+        const ewAngle = Math.random() * Math.PI * 2;
+        this.ewXRatio = Math.cos(ewAngle) * 0.3; this.ewYRatio = Math.sin(ewAngle) * 0.3;
+        this.lookX = Math.cos(Math.random() * Math.PI * 2) * 0.5;
+        this.lookY = Math.sin(Math.random() * Math.PI * 2) * 0.5;
     }
-    update() { this.dist += this.speed; this.life -= 0.005; return this.life > 0.01; }
+    update() { this.r += this.radialSpeed; this.frame++; this.life -= 0.0035; return this.life > 0.01; }
     draw(ctx) {
-        const tx = Math.cos(this.angle) * this.dist; const ty = Math.sin(this.angle) * this.dist;
-        const wave = Math.sin(this.dist * this.offsetFreq + this.offsetPhase) * this.offsetAmp * (1.0 - this.life);
-        const currentSize = this.maxSize * (1.0 - this.life); 
-        const ewR = currentSize * CONFIG.CO_MYAKU.EYE_WHITE_RATIO;
-        const ewX = this.ewXRatio * currentSize; const ewY = this.ewYRatio * currentSize;
-        ctx.save(); ctx.translate(this.baseX + tx - Math.sin(this.angle)*wave, this.baseY + ty + Math.cos(this.angle)*wave);
-        ctx.globalAlpha = Math.min(1.0, this.life * 5.0);
-        ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(0, 0, currentSize, 0, Math.PI * 2); ctx.fill();
+        const angle = this.startAngle + this.driftRate * this.frame;
+        const x = this.baseX + this.r * Math.cos(angle);
+        const y = this.baseY + this.r * Math.sin(angle);
+        const fadeIn = Math.min(1.0, (this.r - currentCoMyakuRadius) / this.fadeRange);
+        const fadeOut = this.life < 0.15 ? this.life / 0.15 : 1.0;
+        const t = this.r / currentCoMyakuRadius;
+        const scale = t * 3.0 / (t + 2.0);
+        const s = this.baseSize * scale;
+        const ewR = s * CONFIG.CO_MYAKU.EYE_WHITE_RATIO;
+        const ewX = this.ewXRatio * s; const ewY = this.ewYRatio * s;
+        ctx.save(); ctx.translate(x, y);
+        ctx.globalAlpha = Math.max(0, fadeIn * fadeOut);
+        ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(0, 0, s, 0, Math.PI * 2); ctx.fill();
         ctx.fillStyle = "white"; ctx.beginPath(); ctx.arc(ewX, ewY, ewR, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = CONFIG.COLORS.BLUE; ctx.beginPath(); ctx.arc(ewX + this.lookX*(ewR*0.5), ewY + this.lookY*(ewR*0.5), currentSize * CONFIG.CO_MYAKU.PUPIL_RATIO, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = CONFIG.COLORS.BLUE; ctx.beginPath(); ctx.arc(ewX + this.lookX*(ewR*0.5), ewY + this.lookY*(ewR*0.5), s * CONFIG.CO_MYAKU.PUPIL_RATIO, 0, Math.PI * 2); ctx.fill();
         ctx.restore();
     }
 }
@@ -656,6 +1075,7 @@ class MainCoMyaku {
         this.targetPupilY = relY;
         
         this.lastTime = performance.now(); this.beatInterval = 60000 / CONFIG.BPM; this.beatCount = 0; this.accumulator = 0;
+        this.audioPulse = 0; // 実際の音量(analyser経由)を滑らかに追従させた値。瞳の脈動に使う。
     }
     updateDimensions() {
         this.bodyR = currentCoMyakuRadius;
@@ -708,7 +1128,9 @@ class MainCoMyaku {
         }
         this.pupilX = this.eyeX + currentRelX;
         this.pupilY = this.eyeY + currentRelY;
-        audioState.activityLevel = Math.max(0.1, 1.0 - ((this.eyeY/eyeLimit + 1) / 2) * 0.9);
+        // 実際に鳴っている音量(analyser経由)を取得し、急な値変化でチカチカしないよう滑らかに追従させる。
+        const targetPulse = audioState.liveLevel ? audioState.liveLevel.overall : 0;
+        this.audioPulse += (targetPulse - this.audioPulse) * 0.25;
         if (!isMasterPlaying) {
             if (bodyY === 0 && jumpVelocity === 0) { if (--jumpTimer <= 0) { jumpVelocity = -5.5; jumpTimer = 200; } }
             if (jumpVelocity !== 0 || bodyY < 0) { bodyY += jumpVelocity; jumpVelocity += 0.35; if (bodyY > 0) { bodyY = 0; jumpVelocity = 0; bodyScaleY = 0.92; } }
@@ -719,7 +1141,11 @@ class MainCoMyaku {
         ctx.save(); ctx.translate(width/2, centerY + bodyY); ctx.scale(1.0, bodyScaleY);
         ctx.fillStyle = CONFIG.COLORS.RED; ctx.beginPath(); ctx.arc(0, 0, this.bodyR, 0, Math.PI * 2); ctx.fill();
         ctx.fillStyle = "white"; ctx.beginPath(); ctx.arc(this.eyeX, this.eyeY, this.whiteEyeR, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = CONFIG.COLORS.BLUE; ctx.beginPath(); ctx.arc(this.pupilX, this.pupilY, this.pupilR, 0, Math.PI * 2); ctx.fill();
+        // 瞳が脈動して大きくなっても白目からはみ出さないよう、白目の境界までの余裕分でサイズを上限クランプする
+        const pupilOffsetDist = Math.hypot(this.pupilX - this.eyeX, this.pupilY - this.eyeY);
+        const maxPupilDrawR = Math.max(this.pupilR, (this.whiteEyeR - pupilOffsetDist) * 0.98);
+        const pupilDrawR = Math.min(this.pupilR * (1 + this.audioPulse * 0.6), maxPupilDrawR);
+        ctx.fillStyle = CONFIG.COLORS.BLUE; ctx.beginPath(); ctx.arc(this.pupilX, this.pupilY, pupilDrawR, 0, Math.PI * 2); ctx.fill();
         ctx.restore();
     }
 }
@@ -734,7 +1160,7 @@ async function togglePlayback(e) {
     const svg = document.getElementById('play-svg');
     if (isMasterPlaying) { 
         isMasterPlaying = false; 
-        if (engine.tickTimeout) { clearTimeout(engine.tickTimeout); engine.tickTimeout = null; }
+        if (engine.schedulerTimer) { clearInterval(engine.schedulerTimer); engine.schedulerTimer = null; }
         btn.classList.remove('playing');
         svg.innerHTML = '<path d="M7 4.5 L19 12 L7 19.5 Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" fill="currentColor"/>';
     } else { 
@@ -758,38 +1184,66 @@ document.getElementById('vol-master').oninput = (e) => {
 
 const setTempo = (scale) => {
     audioState.tempoScale = scale;
-    document.getElementById('tempo-1').classList.toggle('active', scale === 1.0);
-    document.getElementById('tempo-2').classList.toggle('active', scale === 2.0);
+    const t1 = document.getElementById('tempo-1'); const t2 = document.getElementById('tempo-2');
+    t1.classList.toggle('active', scale === 1.0); t1.setAttribute('aria-pressed', String(scale === 1.0));
+    t2.classList.toggle('active', scale === 2.0); t2.setAttribute('aria-pressed', String(scale === 2.0));
 };
 document.getElementById('tempo-1').onclick = () => setTempo(1.0);
 document.getElementById('tempo-2').onclick = () => setTempo(2.0);
 
+document.getElementById('rv-metro').onclick    = () => engine.setReverbType('metro');
+document.getElementById('rv-pavilion').onclick = () => engine.setReverbType('pavilion');
+
 const toggleMute = (part) => {
     audioState[part + 'Muted'] = !audioState[part + 'Muted'];
-    document.getElementById('mute-' + part).classList.toggle('active', audioState[part + 'Muted']);
+    const btn = document.getElementById('mute-' + part);
+    btn.classList.toggle('active', audioState[part + 'Muted']);
+    btn.setAttribute('aria-pressed', String(audioState[part + 'Muted']));
 };
 document.getElementById('mute-piano').onclick = () => toggleMute('piano');
 document.getElementById('mute-strings').onclick = () => toggleMute('strings');
 document.getElementById('mute-bass').onclick = () => toggleMute('bass');
+['mute-piano', 'mute-strings', 'mute-bass'].forEach(id => {
+    document.getElementById(id).addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); document.getElementById(id).click(); }
+    });
+});
 
 document.getElementById('file-input').onchange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (ev) => { bgImage.src = ev.target.result; bgImage.style.display = 'block'; };
-        reader.readAsDataURL(file);
-    }
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        // 大きな写真をそのままbase64で保持するとモバイルでメモリ・描画負荷が増えるため、
+        // 長辺1600pxを上限にダウンスケールしてから背景に適用する。
+        const img = new Image();
+        img.onload = () => {
+            const MAX_DIM = 1600;
+            let iw = img.naturalWidth, ih = img.naturalHeight;
+            if (iw > MAX_DIM || ih > MAX_DIM) {
+                const scale = Math.min(MAX_DIM / iw, MAX_DIM / ih);
+                iw = Math.round(iw * scale); ih = Math.round(ih * scale);
+            }
+            const off = document.createElement('canvas');
+            off.width = iw; off.height = ih;
+            off.getContext('2d').drawImage(img, 0, 0, iw, ih);
+            bgImage.src = off.toDataURL('image/jpeg', 0.85);
+            bgImage.style.display = 'block';
+        };
+        img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
 };
 
 const globalMove = document.getElementById('global-move');
 globalMove.addEventListener('pointerdown', (e) => {
     isPressing = true; mouseX = e.clientX; mouseY = e.clientY;
-    if (isMasterPlaying) {
-        engine.triggerContactSound(Math.floor((e.clientX / width) * 8));
-        entities.push(new Ripple(e.clientX, e.clientY));
-        const colors = [CONFIG.COLORS.RED, CONFIG.COLORS.BLUE, CONFIG.COLORS.WHITE];
-        for (let i = 0; i < 10; i++) entities.push(new SmallParticle(e.clientX, e.clientY, colors[i % 3]));
-    }
+    // 視覚フィードバックは再生中かどうかに関わらず常に出す。
+    // 効果音はAudioContextが初期化済み(engine.ready)であれば鳴る(triggerContactSound内部で判定)。
+    engine.triggerContactSound(Math.floor((e.clientX / width) * 8));
+    entities.push(new Ripple(e.clientX, e.clientY));
+    const colors = [CONFIG.COLORS.RED, CONFIG.COLORS.BLUE, CONFIG.COLORS.WHITE];
+    for (let i = 0; i < 10; i++) entities.push(new SmallParticle(e.clientX, e.clientY, colors[i % 3]));
 });
 
 window.addEventListener('pointermove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
@@ -801,35 +1255,49 @@ function resize() {
     canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
     ctx.scale(dpr, dpr);
 
-    // ドックの領域を特定
     const dockEl = document.getElementById('dock');
     const dockRect = dockEl.getBoundingClientRect();
     const dockTop = dockRect.top;
-    
-    // 画面の物理的な中央
     const screenCenterY = height / 2;
-    
-    // こみゃくのサイズを計算
-    const padding = 40; // ドックとの最小間隔
+    const padding = 40;
     currentCoMyakuRadius = Math.min(CONFIG.CO_MYAKU.RADIUS, (dockTop - padding) / 2.2);
     if (currentCoMyakuRadius < 40) currentCoMyakuRadius = 40;
-
-    // 衝突回避ロジック
-    // 理想的には中央に配置したい
     centerY = screenCenterY;
-
-    // こみゃくの下端 (centerY + radius) が (dockTop - padding) を超える場合、上にずらす
     const bottomEdge = centerY + currentCoMyakuRadius;
     const limit = dockTop - padding;
-    
-    if (bottomEdge > limit) {
-        centerY = limit - currentCoMyakuRadius;
+    if (bottomEdge > limit) centerY = limit - currentCoMyakuRadius;
+
+    // 画面回転などでbodyRが変わった際、目・瞳が新しい境界を超えていれば即座にクランプする。
+    // これをしないと次のupdate()が呼ばれるまで目が体の外に飛び出して見える。
+    if (typeof uiModel !== 'undefined') {
+        uiModel.updateDimensions();
+        const eyeLimit = uiModel.bodyR * uiModel.eyeLimitRatio;
+        const eyeDist = Math.hypot(uiModel.eyeX, uiModel.eyeY);
+        if (eyeDist > eyeLimit) {
+            const a = Math.atan2(uiModel.eyeY, uiModel.eyeX);
+            uiModel.eyeX = Math.cos(a) * eyeLimit;
+            uiModel.eyeY = Math.sin(a) * eyeLimit;
+            uiModel.targetEyeX = uiModel.eyeX;
+            uiModel.targetEyeY = uiModel.eyeY;
+        }
+        const pupilLimit = uiModel.whiteEyeR * uiModel.pupilLimitRatio;
+        const relX = uiModel.pupilX - uiModel.eyeX;
+        const relY = uiModel.pupilY - uiModel.eyeY;
+        const relDist = Math.hypot(relX, relY);
+        if (relDist > pupilLimit) {
+            const a = Math.atan2(relY, relX);
+            uiModel.pupilX = uiModel.eyeX + Math.cos(a) * pupilLimit;
+            uiModel.pupilY = uiModel.eyeY + Math.sin(a) * pupilLimit;
+            uiModel.targetPupilX = Math.cos(a) * pupilLimit;
+            uiModel.targetPupilY = Math.sin(a) * pupilLimit;
+        }
     }
 }
 
 function loop() {
     ctx.clearRect(0, 0, width, height);
     entities = entities.filter(e => e.update() ? (e.draw(ctx), true) : false);
+    if (engine.ready) audioState.liveLevel = engine.getOverallLevel();
     uiModel.update(); uiModel.draw(ctx);
     requestAnimationFrame(loop);
 }
