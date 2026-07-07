@@ -143,8 +143,42 @@
             align-items: center;
             border-bottom: 1px solid #eee;
         }
-        .ph-title { font-size: 18px; font-weight: 900; letter-spacing: 0.05em; color: var(--expo-dark-gray); }
+        .ph-title { font-size: 18px; font-weight: 900; letter-spacing: 0.05em; color: var(--expo-dark-gray); flex: 1; }
         .ph-close { background: none; border: none; cursor: pointer; color: var(--expo-gray); padding: 4px; }
+        .ph-info  { background: none; border: none; cursor: pointer; color: var(--expo-blue); padding: 4px; margin-right: 8px; display: flex; align-items: center; }
+
+        .info-modal-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .info-modal-overlay.open { display: flex; }
+        .info-modal-box {
+            background: #fff;
+            width: 90%; max-width: 420px;
+            max-height: 80vh;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .info-modal-content {
+            padding: 20px 24px 28px;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--expo-dark-gray);
+        }
+        .info-modal-content h3 { font-size: 17px; font-weight: 900; margin: 0 0 4px; }
+        .info-modal-content h4 { font-size: 13px; font-weight: 900; color: var(--expo-dark-gray); margin: 20px 0 6px; letter-spacing: 0.04em; }
+        .info-modal-content p { margin: 8px 0; }
+        .info-modal-content ul { margin: 6px 0; padding-left: 18px; }
+        .info-modal-content li { margin: 4px 0; }
+        .info-modal-content a { color: var(--expo-blue); }
+        .info-version { color: #8A9096; font-size: 12px; margin: 0 0 14px; }
 
         .panel-content {
             flex: 1;
@@ -230,6 +264,13 @@
     <div id="panel">
         <div class="ph">
             <div class="ph-title">Settings</div>
+            <button class="ph-info" onclick="openInfo()" aria-label="このアプリについて">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="11.5"></line>
+                    <circle cx="12" cy="7.8" r="0.9" fill="currentColor" stroke="none"></circle>
+                </svg>
+            </button>
             <button class="ph-close" onclick="closePanel()">
                 <i data-lucide="x" style="width: 24px; height: 24px;"></i>
             </button>
@@ -295,11 +336,49 @@
                 </div>
             </div>
             <div class="menu-footer">
-                <strong>Ver 2.2.0</strong><br>
+                <strong>Ver 2.2.1</strong><br>
                 このコンテンツは個人による非公式の二次創作（ファンアート）です。<br>
                 参考：<a href="https://www.expo2025.or.jp/news/news-20260330-01/" target="_blank">ガイドライン</a><br>
                 Presented by <strong>ARPeggioRev2</strong><br>
                 Program assisted by Gemini & Claude
+            </div>
+        </div>
+    </div>
+
+    <div id="info-modal" class="info-modal-overlay" onclick="if(event.target===this)closeInfo()">
+        <div class="info-modal-box">
+            <div class="ph">
+                <div class="ph-title">About</div>
+                <button class="ph-close" onclick="closeInfo()">
+                    <i data-lucide="x" style="width: 24px; height: 24px;"></i>
+                </button>
+            </div>
+            <div class="info-modal-content">
+                <h3>こみゃくのおと <span style="color:#767a7d; font-weight:400;">(Co-MYAKU Note)</span></h3>
+                <p class="info-version">Version 2.2.1</p>
+                <p>2025年日本国際博覧会（大阪・関西万博）の公式キャラクターからインスパイアされた、非公式のインタラクティブ・サウンド・ファンアート（二次創作）です。</p>
+                <p>Web Audio APIによる自動生成アンビエント・ミュージックと、Canvas APIによる有機的なビジュアル・インタラクションを融合させた、ブラウザで体験するデジタル・トイです。</p>
+
+                <h4>楽器仕様</h4>
+                <ul>
+                    <li><strong>Piano：</strong>エレクトリックピアノ風の倍音設計</li>
+                    <li><strong>Strings：</strong>ストリングアンサンブル風ビンテージ・シンセストリングス</li>
+                    <li><strong>Bass：</strong>ベースシンセサイザー風、LPFスイープ付き</li>
+                </ul>
+
+                <h4>リバーブタイプ</h4>
+                <ul>
+                    <li><strong>Metro：</strong>地下鉄駅コンコースの巨大地下空間をシミュレート</li>
+                    <li><strong>Pavilion：</strong>膜構造空間ステージの暗く柔らかい残響</li>
+                </ul>
+
+                <h4>クレジット</h4>
+                <p>Presented by <strong>ARPeggioRev2</strong><br>
+                Program assisted by Gemini &amp; Claude</p>
+
+                <h4>免責事項</h4>
+                <p>本作品は<a href="https://www.expo2025.or.jp/news/news-20260330-01/" target="_blank">二次創作ガイドライン</a>に基づき個人制作されたファンアートです。<br>
+                運営団体および公式とは一切関係がありません。</p>
             </div>
         </div>
     </div>
@@ -417,6 +496,13 @@ function closePanel() {
     document.getElementById('overlay').classList.remove('on');
 }
 
+function openInfo() {
+    document.getElementById('info-modal').classList.add('open');
+}
+function closeInfo() {
+    document.getElementById('info-modal').classList.remove('open');
+}
+
 // --- SOUND ENGINE ---
 class SoundEngine {
     constructor() {
@@ -427,7 +513,6 @@ class SoundEngine {
             stringsHigh: [329.63, 369.99, 415.30, 440.00, 493.88, 554.37, 659.25],
             stringsLow: [164.81, 185.00, 207.65, 220.00, 246.94, 277.18, 329.63],
             bass:     [82.41, 103.83, 123.47],  // E2, G#2, B2 (Eメジャートライアド)
-            bassHigh: [164.82, 246.94],           // E3, B3 (Mid)
             piano1: [329.63, 415.30, 493.88, 659.25],
             piano2: [164.81, 207.65, 246.94, 293.66, 329.63],
             contact: [329.63, 369.99, 415.30, 440.00, 493.88, 554.37, 622.25, 659.25]
@@ -1303,7 +1388,8 @@ function loop() {
 }
 
 window.onresize = resize;
-resize(); loop(); lucide.createIcons();
+resize(); loop();
+try { if (typeof lucide !== 'undefined') lucide.createIcons(); } catch (e) { console.warn('lucide icons failed to load:', e); }
 </script>
 </body>
 </html>
